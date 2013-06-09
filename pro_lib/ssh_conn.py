@@ -1,10 +1,8 @@
 #coding utf8
 import paramiko,os
-from lib import logs
 import config
-l=logs.Log()
 c=config.GlobalConfig(1)
-paramiko.util.log_to_file("a.txt",'ERROR')
+paramiko.util.log_to_file("ssh_conn.log",'ERROR')
 class ssh_conn():
     def __init__(self):
         self.ssh=paramiko.SSHClient()
@@ -20,7 +18,7 @@ class ssh_conn():
                 self.ssh.connect(ip,22,username,pwd,timeout=10)
             return True
         except Exception,ex:
-            l.log("CONNECTION",str(ex), 1)
+            #l.log("CONNECTION",str(ex), 1)
             return False
     def close(self):
         self.ssh.close()
@@ -55,12 +53,12 @@ class ssh_sftp():
             for lfile in files:
                 sftp=paramiko.SFTPClient.from_transport(transfer)
                 rfile=lfile
-                l.log("TRANSFER","Tranfer file: %s" % lfile,3)
+                #l.log("TRANSFER","Tranfer file: %s" % lfile,3)
                 sftp.put(os.path.join(localdir,lfile),os.path.join(self.remotedir,rfile))
             transfer.close()
             return True
         except Exception,e:
-            l.log("TRANSFER",str(e),1)
+            #l.log("TRANSFER",str(e),1)
             transfer.close()
             return False
 

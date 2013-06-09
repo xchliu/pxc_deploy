@@ -1,0 +1,8 @@
+[global]
+pxc_version='5.5.30'
+log_dir=pxc_deploy.log
+
+[server1]
+ip=127.0.0.1
+user=root
+pwd=root
